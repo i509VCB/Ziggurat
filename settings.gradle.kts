@@ -4,12 +4,12 @@ include("api")
 include("core")
 
 pluginManagement {
-    repositories {
-        maven("https://maven.fabricmc.net/") {
-            name = "Fabric"
-        }
+	repositories {
+		maven("https://maven.fabricmc.net/") {
+			name = "Fabric"
+		}
 
-        gradlePluginPortal()
-        jcenter()
-    }
+		gradlePluginPortal()
+		jcenter()
+	}
 }
