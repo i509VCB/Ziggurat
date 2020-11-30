@@ -8,7 +8,7 @@ import net.minecraft.util.registry.RegistryKey;
  * Represents a type of flag.
  * A flag is simply a keyed object which may be used to obtain a value.
  */
-public /* sealed */ interface FlagType {
+public interface FlagType {
 	Identifier getId();
 
 	interface Bool extends FlagType {

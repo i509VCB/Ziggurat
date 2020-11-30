@@ -87,18 +87,18 @@ allprojects {
 	}
 }
 
-val apiProject = project(":api") {
-
-}
-
+val apiProject = project(":api")
 val coreProject = project(":core") {
 	dependencies {
-		api(project(":api"))
+		api(apiProject)
 
-		modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricApiVersion")
+		setOf<String>(
+				"fabric-api-base",
+				"fabric-lifecycle-events-v1"
+		).forEach { module ->
+			modImplementation(fabricApi.module(module, fabricApiVersion))?.let {
+				include(it)
+			}
+		}
 	}
-}
-
-repositories {
-	mavenCentral()
 }
