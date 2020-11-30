@@ -43,6 +43,20 @@ allprojects {
     loom {
         shareCaches = true
     }
+
+    tasks.compileJava.configure {
+        val targetVersion = 8
+
+        if (JavaVersion.current().isJava9Compatible) {
+            options.release.set(targetVersion)
+        }
+    }
+
+    spotless {
+        java {
+            importOrderFile(rootProject.file("codeformat/ziggurat.importorder"))
+        }
+    }
 }
 
 val apiProject = project(":api") {

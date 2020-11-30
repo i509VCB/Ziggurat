@@ -2,13 +2,14 @@ package me.i509.ziggurat.internal;
 
 import java.util.UUID;
 
-import me.i509.ziggurat.api.GameSession;
-import me.i509.ziggurat.api.flag.FlagType;
 import org.jetbrains.annotations.ApiStatus;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+
+import me.i509.ziggurat.api.GameSession;
+import me.i509.ziggurat.api.flag.FlagType;
 
 /**
  * This is an internal implementation class for ziggurat.

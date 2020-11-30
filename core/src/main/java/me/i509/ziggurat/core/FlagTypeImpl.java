@@ -1,8 +1,8 @@
 package me.i509.ziggurat.core;
 
-import me.i509.ziggurat.api.flag.FlagType;
-
 import net.minecraft.util.Identifier;
+
+import me.i509.ziggurat.api.flag.FlagType;
 
 abstract class FlagTypeImpl implements FlagType {
 	static void assertFlagSealed(FlagType flag) {

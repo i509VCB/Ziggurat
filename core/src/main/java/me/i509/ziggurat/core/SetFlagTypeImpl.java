@@ -6,10 +6,10 @@ import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.UUID;
 
-import me.i509.ziggurat.api.flag.FlagType;
-
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+
+import me.i509.ziggurat.api.flag.FlagType;
 
 abstract class SetFlagTypeImpl<V> extends FlagTypeImpl implements FlagType.Set<V> {
 	private final Class<V> valueClass;

@@ -2,10 +2,11 @@ package me.i509.ziggurat.api.flag;
 
 import java.util.UUID;
 
-import me.i509.ziggurat.internal.ZigguratImplementation;
-
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+
+import me.i509.ziggurat.internal.Uninstiantable;
+import me.i509.ziggurat.internal.ZigguratImplementation;
 
 public final class FlagFactory {
 	static {
@@ -65,5 +66,6 @@ public final class FlagFactory {
 	}
 
 	private FlagFactory() {
+		Uninstiantable.whyDoIHearBossMusic(FlagFactory.class);
 	}
 }

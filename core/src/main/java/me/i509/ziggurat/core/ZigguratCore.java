@@ -2,18 +2,22 @@ package me.i509.ziggurat.core;
 
 import java.util.UUID;
 
-import me.i509.ziggurat.api.GameSession;
-import me.i509.ziggurat.api.flag.FlagType;
-import me.i509.ziggurat.internal.Implementation;
-
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import me.i509.ziggurat.api.GameSession;
+import me.i509.ziggurat.api.flag.FlagType;
+import me.i509.ziggurat.core.duck.GameSessionDuck;
+import me.i509.ziggurat.internal.Implementation;
+
 public final class ZigguratCore implements Implementation {
 	@Override
 	public GameSession getSession(MinecraftServer server) throws IllegalStateException {
-		return null;
+		final GameSessionImpl session = ((GameSessionDuck) server).getGameSession();
+		if (session != null) return session;
+
+		throw new IllegalStateException(); // TODO: Msg
 	}
 
 	@Override
@@ -48,7 +52,7 @@ public final class ZigguratCore implements Implementation {
 
 	@Override
 	public FlagType.Set<UUID> createUuidSetFlag(Identifier id) {
-		return null;
+		return new SetFlagTypeImpl.UuidImpl(id);
 	}
 
 	@Override

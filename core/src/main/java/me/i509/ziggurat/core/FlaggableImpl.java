@@ -14,14 +14,15 @@ import it.unimi.dsi.fastutil.objects.Reference2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Reference2DoubleOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Reference2IntMap;
 import it.unimi.dsi.fastutil.objects.Reference2IntOpenHashMap;
-import me.i509.ziggurat.api.flag.FlagSetResult;
-import me.i509.ziggurat.api.flag.FlagType;
-import me.i509.ziggurat.api.flag.FlagVisitor;
-import me.i509.ziggurat.api.flag.Flaggable;
 
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
+
+import me.i509.ziggurat.api.flag.FlagSetResult;
+import me.i509.ziggurat.api.flag.FlagType;
+import me.i509.ziggurat.api.flag.FlagVisitor;
+import me.i509.ziggurat.api.flag.Flaggable;
 
 public abstract class FlaggableImpl implements Flaggable {
 	private final Set<FlagType> flags = Collections.newSetFromMap(new IdentityHashMap<>());

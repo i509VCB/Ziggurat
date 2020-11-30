@@ -2,10 +2,11 @@ package me.i509.ziggurat.internal;
 
 import java.util.Objects;
 
-import me.i509.ziggurat.api.Ziggurat;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
+
+import me.i509.ziggurat.api.Ziggurat;
 
 /**
  * This is an internal implementation class for ziggurat.
@@ -41,5 +42,6 @@ public final class ZigguratImplementation {
 	}
 
 	private ZigguratImplementation() {
+		Uninstiantable.whyDoIHearBossMusic(ZigguratImplementation.class);
 	}
 }
