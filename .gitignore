@@ -1,14 +1,35 @@
+# Gradle
 .gradle
-/build/
 
-# Ignore Gradle GUI config
-gradle-app.setting
+# Eclipse
+.checkstyle
+.classpath
+.metadata
+.settings
+.project
+*.launch
 
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
+# Intellij/Idea
+.factorypath
+.idea
+*.iml
+*.ipr
+*.iws
 
-# Cache of project
-.gradletasknamecache
+# Build artifacts
+bin/
+build/
+jars/
+out/
+classes/
 
-# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
-# gradle/wrapper/gradle-wrapper.properties
+# Debug artifacts
+run
+*.log
+
+# Windows
+*.db
+$RECYCLE.BIN/
+
+# Mac
+.DS_Store
