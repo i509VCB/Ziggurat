@@ -6,6 +6,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
 
+import net.minecraft.util.Identifier;
+
 import me.i509.ziggurat.api.Ziggurat;
 
 /**
@@ -43,5 +45,11 @@ public final class ZigguratImplementation {
 
 	private ZigguratImplementation() {
 		Uninstiantable.whyDoIHearBossMusic(ZigguratImplementation.class);
+	}
+
+	public static Identifier id(String path) {
+		Objects.requireNonNull(path);
+
+		return new Identifier("ziggurat", path);
 	}
 }

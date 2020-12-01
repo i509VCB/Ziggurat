@@ -26,7 +26,7 @@ public final class FlagFactory {
 	}
 
 	public static FlagType.Int ofInt(Identifier id, int minimumBound, int maximumBound) {
-		return ZigguratImplementation.requireImpl().createIntFlag(id, minimumBound, maximumBound);
+		return ZigguratImplementation.requireImpl().getOrCreateIntFlag(id, minimumBound, maximumBound);
 	}
 
 	public static FlagType.Double ofDouble(Identifier id) {
@@ -38,31 +38,31 @@ public final class FlagFactory {
 	}
 
 	public static FlagType.Double ofDouble(Identifier id, double minimumBound, double maximumBound) {
-		return ZigguratImplementation.requireImpl().createDoubleFlag(id, minimumBound, maximumBound);
+		return ZigguratImplementation.requireImpl().getOrCreateDoubleFlag(id, minimumBound, maximumBound);
 	}
 
 	public static FlagType.Uuid ofUuid(Identifier id) {
-		return ZigguratImplementation.requireImpl().createUuidFlag(id);
+		return ZigguratImplementation.requireImpl().getOrCreateUuidFlag(id);
 	}
 
 	public static <E extends Enum<E>> FlagType.Enum<E> ofEnum(Identifier id, Class<E> enumClass) {
-		return ZigguratImplementation.requireImpl().createEnumFlag(id, enumClass);
+		return ZigguratImplementation.requireImpl().getOrCreateEnumFlag(id, enumClass);
 	}
 
 	public static <V> FlagType.RegistryEntry<V> ofRegistryEntry(Identifier id, Registry<V> registry) {
-		return ZigguratImplementation.requireImpl().createRegistryEntryFlag(id, registry);
+		return ZigguratImplementation.requireImpl().getOrCreateRegistryEntryFlag(id, registry);
 	}
 
 	public static FlagType.Set<UUID> ofUuidSet(Identifier id) {
-		return ZigguratImplementation.requireImpl().createUuidSetFlag(id);
+		return ZigguratImplementation.requireImpl().getOrCreateUuidSetFlag(id);
 	}
 
 	public static <E extends Enum<E>> FlagType.Set<E> ofEnumSet(Identifier id, Class<E> enumClass) {
-		return ZigguratImplementation.requireImpl().createEnumSetFlag(id, enumClass);
+		return ZigguratImplementation.requireImpl().getOrCreateEnumSetFlag(id, enumClass);
 	}
 
 	public static <V> FlagType.Set<V> ofRegistryEntrySet(Identifier id, Class<V> entryClass, Registry<V> registry) {
-		return ZigguratImplementation.requireImpl().createRegistryEntrySet(id, entryClass, registry);
+		return ZigguratImplementation.requireImpl().getOrCreateRegistryEntrySetFlag(id, entryClass, registry);
 	}
 
 	private FlagFactory() {

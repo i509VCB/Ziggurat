@@ -23,21 +23,21 @@ public interface Implementation {
 
 	FlagType.Bool createBoolFlag(Identifier id);
 
-	FlagType.Int createIntFlag(Identifier id, int minimumBound, int maximumBound);
+	FlagType.Int getOrCreateIntFlag(Identifier id, int minimumBound, int maximumBound);
 
-	FlagType.Double createDoubleFlag(Identifier id, double minimumBound, double maximumBound);
+	FlagType.Double getOrCreateDoubleFlag(Identifier id, double minimumBound, double maximumBound);
 
-	FlagType.Uuid createUuidFlag(Identifier id);
+	FlagType.Uuid getOrCreateUuidFlag(Identifier id);
 
-	<E extends Enum<E>> FlagType.Enum<E> createEnumFlag(Identifier id, Class<E> enumClass);
+	<E extends Enum<E>> FlagType.Enum<E> getOrCreateEnumFlag(Identifier id, Class<E> enumClass);
 
-	<V> FlagType.RegistryEntry<V> createRegistryEntryFlag(Identifier id, Registry<V> registry);
+	<V> FlagType.RegistryEntry<V> getOrCreateRegistryEntryFlag(Identifier id, Registry<V> registry);
 
-	FlagType.Set<UUID> createUuidSetFlag(Identifier id);
+	FlagType.Set<UUID> getOrCreateUuidSetFlag(Identifier id);
 
-	<E extends Enum<E>> FlagType.Set<E> createEnumSetFlag(Identifier id, Class<E> enumClass);
+	<E extends Enum<E>> FlagType.Set<E> getOrCreateEnumSetFlag(Identifier id, Class<E> enumClass);
 
-	<V> FlagType.Set<V> createRegistryEntrySet(Identifier id, Class<V> entryClass, Registry<V> registry);
+	<V> FlagType.Set<V> getOrCreateRegistryEntrySetFlag(Identifier id, Class<V> entryClass, Registry<V> registry);
 
 	PlayerActor getPlayerActor(ServerPlayerEntity player);
 }
