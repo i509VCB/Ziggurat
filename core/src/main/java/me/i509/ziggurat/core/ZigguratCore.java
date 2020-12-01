@@ -1,12 +1,15 @@
 package me.i509.ziggurat.core;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import me.i509.ziggurat.api.GameSession;
+import me.i509.ziggurat.api.actor.PlayerActor;
 import me.i509.ziggurat.api.flag.FlagType;
 import me.i509.ziggurat.core.duck.GameSessionDuck;
 import me.i509.ziggurat.internal.Implementation;
@@ -22,46 +25,64 @@ public final class ZigguratCore implements Implementation {
 
 	@Override
 	public FlagType.Bool createBoolFlag(Identifier id) {
-		return null;
+		return FlagTypeImpl.createBool(id);
 	}
 
 	@Override
 	public FlagType.Int createIntFlag(Identifier id, int minimumBound, int maximumBound) {
-		return null;
+		return FlagTypeImpl.createInt(id, minimumBound, maximumBound);
 	}
 
 	@Override
-	public FlagType.Int createDoubleFlag(Identifier id, double minimumBound, double maximumBound) {
-		return null;
+	public FlagType.Double createDoubleFlag(Identifier id, double minimumBound, double maximumBound) {
+		return FlagTypeImpl.createDouble(id, minimumBound, maximumBound);
 	}
 
 	@Override
 	public FlagType.Uuid createUuidFlag(Identifier id) {
-		return null;
+		return FlagTypeImpl.createUuid(id);
 	}
 
 	@Override
 	public <E extends Enum<E>> FlagType.Enum<E> createEnumFlag(Identifier id, Class<E> enumClass) {
-		return null;
+		return FlagTypeImpl.createEnum(id, enumClass);
 	}
 
 	@Override
 	public <V> FlagType.RegistryEntry<V> createRegistryEntryFlag(Identifier id, Registry<V> registry) {
-		return null;
+		return FlagTypeImpl.createRegistryEntry(id, registry);
 	}
 
 	@Override
 	public FlagType.Set<UUID> createUuidSetFlag(Identifier id) {
-		return new SetFlagTypeImpl.UuidImpl(id);
+		Objects.requireNonNull(id);
+
+		return SetFlagTypeImpl.createUuidSet(id);
 	}
 
 	@Override
 	public <E extends Enum<E>> FlagType.Set<E> createEnumSetFlag(Identifier id, Class<E> enumClass) {
-		return new SetFlagTypeImpl.EnumImpl<>(id, enumClass);
+		Objects.requireNonNull(id);
+		Objects.requireNonNull(enumClass);
+
+		if (!enumClass.isEnum()) {
+			throw new IllegalArgumentException("Class must be an enum!");
+		}
+
+		return SetFlagTypeImpl.createEnumSet(id, enumClass);
 	}
 
 	@Override
 	public <V> FlagType.Set<V> createRegistryEntrySet(Identifier id, Class<V> entryClass, Registry<V> registry) {
-		return new SetFlagTypeImpl.RegistryEntryImpl<>(id, entryClass, registry);
+		Objects.requireNonNull(id);
+		Objects.requireNonNull(entryClass);
+		Objects.requireNonNull(registry);
+
+		return SetFlagTypeImpl.createRegistryEntrySet(id, entryClass, registry);
+	}
+
+	@Override
+	public PlayerActor getPlayerActor(ServerPlayerEntity player) {
+		return null;
 	}
 }

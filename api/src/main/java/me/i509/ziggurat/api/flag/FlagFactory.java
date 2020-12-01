@@ -29,15 +29,15 @@ public final class FlagFactory {
 		return ZigguratImplementation.requireImpl().createIntFlag(id, minimumBound, maximumBound);
 	}
 
-	public static FlagType.Int ofDouble(Identifier id) {
+	public static FlagType.Double ofDouble(Identifier id) {
 		return ofDouble(id, Double.MIN_VALUE);
 	}
 
-	public static FlagType.Int ofDouble(Identifier id, double minimumBound) {
+	public static FlagType.Double ofDouble(Identifier id, double minimumBound) {
 		return ofDouble(id, minimumBound, Double.MAX_VALUE);
 	}
 
-	public static FlagType.Int ofDouble(Identifier id, double minimumBound, double maximumBound) {
+	public static FlagType.Double ofDouble(Identifier id, double minimumBound, double maximumBound) {
 		return ZigguratImplementation.requireImpl().createDoubleFlag(id, minimumBound, maximumBound);
 	}
 

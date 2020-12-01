@@ -5,10 +5,12 @@ import java.util.UUID;
 import org.jetbrains.annotations.ApiStatus;
 
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import me.i509.ziggurat.api.GameSession;
+import me.i509.ziggurat.api.actor.PlayerActor;
 import me.i509.ziggurat.api.flag.FlagType;
 
 /**
@@ -23,7 +25,7 @@ public interface Implementation {
 
 	FlagType.Int createIntFlag(Identifier id, int minimumBound, int maximumBound);
 
-	FlagType.Int createDoubleFlag(Identifier id, double minimumBound, double maximumBound);
+	FlagType.Double createDoubleFlag(Identifier id, double minimumBound, double maximumBound);
 
 	FlagType.Uuid createUuidFlag(Identifier id);
 
@@ -36,4 +38,6 @@ public interface Implementation {
 	<E extends Enum<E>> FlagType.Set<E> createEnumSetFlag(Identifier id, Class<E> enumClass);
 
 	<V> FlagType.Set<V> createRegistryEntrySet(Identifier id, Class<V> entryClass, Registry<V> registry);
+
+	PlayerActor getPlayerActor(ServerPlayerEntity player);
 }

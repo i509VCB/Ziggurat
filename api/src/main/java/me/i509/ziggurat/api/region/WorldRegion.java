@@ -5,6 +5,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
+import me.i509.ziggurat.api.flag.FlagVisitor;
 import me.i509.ziggurat.api.flag.Flaggable;
 
 /**
@@ -15,7 +16,7 @@ public interface WorldRegion extends Region {
 
 	RegistryKey<World> getWorldKey();
 
-	void accept(int x, int y, int z, Flaggable.Visitor visitor);
+	void accept(int x, int y, int z, FlagVisitor visitor);
 
-	void accept(Box box, Flaggable.Visitor visitor);
+	void accept(Box box, FlagVisitor visitor);
 }
