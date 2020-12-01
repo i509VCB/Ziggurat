@@ -13,11 +13,13 @@ abstract class MinecraftServerMixin implements GameSessionDuck {
 	@Unique
 	private GameSessionImpl session;
 
-	public GameSessionImpl getSession() {
+	@Override
+	public GameSessionImpl getGameSession() {
 		return this.session;
 	}
 
-	public void setSession(GameSessionImpl session) {
+	@Override
+	public void setGameSession(GameSessionImpl session) {
 		this.session = session;
 	}
 }

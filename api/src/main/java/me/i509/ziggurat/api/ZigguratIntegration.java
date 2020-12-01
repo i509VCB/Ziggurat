@@ -2,10 +2,11 @@ package me.i509.ziggurat.api;
 
 import net.minecraft.server.MinecraftServer;
 
+import net.fabricmc.loader.api.FabricLoader;
+
 /**
  * The entrypoint for an integration with ziggurat,
- * Mods may use this to be notified when a ziggurat implementation is present.
- * This interface is an entrypoint and is keyed as {@code ziggurat:integration}.
+ * This interface is an {@linkplain FabricLoader#getEntrypointContainers(String, Class) entrypoint} and the key is {@code ziggurat:integration}.
  *
  * <p>Below is an example of how an integration is specified in a {@code fabric.mod.json}.
  * <pre>{@code
@@ -17,12 +18,17 @@ import net.minecraft.server.MinecraftServer;
  * }
  * }</pre>
  *
- * @see net.fabricmc.loader.api.FabricLoader#getEntrypointContainers(String, Class).
+ * <p>An integration only has to implement two methods, being {@linkplain #getIntegrationName() the integration name} and {@linkplain #init() initialization}.
+ * Other methods in the integration class may be useful, such as getting notified when a game session is {@linkplain #initSession(GameSession) initialized} or {@linkplain #endSession(GameSession) ended}.
+ *
+ * @see FabricLoader#getEntrypointContainers(String, Class)
  */
 public interface ZigguratIntegration {
 	/**
 	 * Gets the name of this integration for identifying each individual integration for a mod.
-	 * This should only contain the name of the integration and does not need to contain the mod name, since Fabric Loader will let Ziggurat know which mod has provided the integration instance.
+	 *
+	 * <p>This should only contain the name of the integration and does not need to contain the mod name.
+	 * Fabric Loader will let Ziggurat know which mod has provided the integration instance, so including the mod name is redundant.
 	 *
 	 * @return the integration name
 	 */
@@ -33,9 +39,17 @@ public interface ZigguratIntegration {
 	 * If this method is called, Ziggurat is guaranteed to be loaded and other mods may initialize their own integration logic.
 	 *
 	 * @return whether the mod wishes to enable this integration.
-	 * @apiNote if {@code false} is returned by this method, this integration will receive no future calls when a {@linkplain ZigguratIntegration#initSession(GameSession) session is initialized}.
+	 * @apiNote if {@code false} is returned by this method, this integration will receive no further notifications.
 	 */
 	boolean init();
+
+	/**
+	 * Called when an integration should attach it's flags to the type of region desired.
+	 *
+	 * @param registrar the flag attachment registrar
+	 */
+	default void registerFlagAttachments(FlagAttachmentRegistrar registrar) {
+	}
 
 	/**
 	 * Called when Ziggurat has initialized the game session.
@@ -43,7 +57,8 @@ public interface ZigguratIntegration {
 	 *
 	 * @param session the session that has been initialized
 	 */
-	void initSession(GameSession session);
+	default void initSession(GameSession session) {
+	}
 
 	/**
 	 * Called when Ziggurat has stopped the game session.
@@ -52,5 +67,6 @@ public interface ZigguratIntegration {
 	 *
 	 * @param session the session that has ended
 	 */
-	void endSession(GameSession session);
+	default void endSession(GameSession session) {
+	}
 }

@@ -92,8 +92,10 @@ val coreProject = project(":core") {
 	dependencies {
 		api(apiProject)
 
-		setOf<String>(
+		setOf(
 				"fabric-api-base",
+				"fabric-command-api-v1",
+				"fabric-events-interaction-v0",
 				"fabric-lifecycle-events-v1"
 		).forEach { module ->
 			modImplementation(fabricApi.module(module, fabricApiVersion))?.let {

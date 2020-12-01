@@ -1,20 +1,57 @@
 package me.i509.ziggurat.core;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.entrypoint.EntrypointContainer;
+
 import me.i509.ziggurat.api.GameSession;
+import me.i509.ziggurat.api.Ziggurat;
+import me.i509.ziggurat.api.ZigguratIntegration;
 import me.i509.ziggurat.api.actor.PlayerActor;
 import me.i509.ziggurat.api.flag.FlagType;
 import me.i509.ziggurat.core.duck.GameSessionDuck;
+import me.i509.ziggurat.core.event.ZigguratEventImpl;
 import me.i509.ziggurat.internal.Implementation;
+import me.i509.ziggurat.internal.ZigguratImplementation;
 
 public final class ZigguratCore implements Implementation {
+	private static final Logger LOGGER = LogManager.getLogger(Ziggurat.class);
+	private final List<EntrypointContainer<ZigguratIntegration>> enabledIntegrations = new ArrayList<>();
+
+	public ZigguratCore() {
+		// Do not set the implementation yet, as events are locked behind the impl being loaded to prevent double reg
+		ZigguratEventImpl.initEvents();
+		ZigguratImplementation.setImplementation(this);
+
+		this.completeSetup();
+	}
+
+	private void completeSetup() {
+		LOGGER.info("Loading integrations");
+		final List<EntrypointContainer<ZigguratIntegration>> integrations = FabricLoader.getInstance().getEntrypointContainers("ziggurat:integration", ZigguratIntegration.class);
+
+		for (EntrypointContainer<ZigguratIntegration> integration : integrations) {
+			if (integration.getEntrypoint().init()) {
+				this.enabledIntegrations.add(integration);
+				LOGGER.info("Loaded integration of name \"{}\" from mod {}", integration.getEntrypoint().getIntegrationName(), integration.getProvider().getMetadata().getId());
+			} else {
+				LOGGER.info("Not loading integration of name \"{}\" from mod {}", integration.getEntrypoint().getIntegrationName(), integration.getProvider().getMetadata().getId());
+			}
+		}
+	}
+
 	@Override
 	public GameSession getSession(MinecraftServer server) throws IllegalStateException {
 		final GameSessionImpl session = ((GameSessionDuck) server).getGameSession();
