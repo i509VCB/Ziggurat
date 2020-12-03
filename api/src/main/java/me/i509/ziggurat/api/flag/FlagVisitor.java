@@ -49,14 +49,14 @@ public interface FlagVisitor {
 		@Override
 		public void visitInt(FlagType.Int flag, int value) {
 			if (this.parent != null) {
-				this.visitInt(flag, value);
+				this.parent.visitInt(flag, value);
 			}
 		}
 
 		@Override
 		public void visitDouble(FlagType.Double flag, double value) {
 			if (this.parent != null) {
-				this.visitDouble(flag, value);
+				this.parent.visitDouble(flag, value);
 			}
 		}
 

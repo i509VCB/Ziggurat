@@ -7,6 +7,7 @@ plugins {
 	`maven-publish`
 	id("com.diffplug.spotless") version "5.8.2"
 	id("fabric-loom") version "0.5-SNAPSHOT"
+	id("org.spongepowered.gradle.sort") version "0.11.5" // So we can sort the fields in "Flags"
 }
 
 val archivesBaseName: String by rootProject
@@ -30,6 +31,7 @@ allprojects {
 		plugin("maven-publish")
 		plugin("com.diffplug.spotless")
 		plugin("fabric-loom")
+		plugin("org.spongepowered.gradle.sort")
 	}
 
 	repositories {
@@ -87,7 +89,12 @@ allprojects {
 	}
 }
 
-val apiProject = project(":api")
+val apiProject = project(":api") {
+	tasks.sortClassFields {
+		add(sourceSets.main.name, "me.i509.ziggurat.api.flag.Flags")
+	}
+}
+
 val coreProject = project(":core") {
 	dependencies {
 		api(apiProject)
