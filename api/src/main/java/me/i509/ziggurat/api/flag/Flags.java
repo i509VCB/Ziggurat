@@ -31,6 +31,9 @@ public final class Flags {
 	//  Decreasing hunger
 	//  Fall damage
 	//  Shoot projectile (Using item or entity for filtering?)
+	//  Set respawn point (Needs a think)
+	//  Entity interaction
+	//  Use item
 
 	// SORTFIELDS:ON
 
