@@ -29,6 +29,9 @@ public interface FlagType {
 	interface Uuid extends FlagType {
 	}
 
+	interface Str extends FlagType {
+	}
+
 	interface Enum<E extends java.lang.Enum<E>> extends FlagType {
 		Class<E> getEnumClass();
 	}

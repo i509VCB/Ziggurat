@@ -4,16 +4,17 @@ import static me.i509.ziggurat.internal.ZigguratImplementation.id;
 
 import java.util.UUID;
 
-import me.i509.ziggurat.api.region.GlobalRegion;
-import me.i509.ziggurat.api.region.WorldRegion;
-import me.i509.ziggurat.internal.Uninstiantable;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.PortalForcer;
 
+import me.i509.ziggurat.api.region.GlobalRegion;
+import me.i509.ziggurat.api.region.WorldRegion;
+import me.i509.ziggurat.internal.Uninstiantable;
+
 /**
  * An enumeration of all builtin flags.
+ *
  * @see FlagFactory
  */
 public final class Flags {

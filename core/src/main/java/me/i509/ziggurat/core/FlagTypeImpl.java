@@ -23,6 +23,10 @@ abstract class FlagTypeImpl implements FlagType {
 		return new UuidImpl(id);
 	}
 
+	static FlagType.Str createString(Identifier id) {
+		return new StrImpl(id);
+	}
+
 	static <E extends java.lang.Enum<E>> FlagType.Enum<E> createEnum(Identifier id, Class<E> enumClass) {
 		return new EnumImpl<>(id, enumClass);
 	}
@@ -92,6 +96,12 @@ abstract class FlagTypeImpl implements FlagType {
 
 	private static final class UuidImpl extends FlagTypeImpl implements FlagType.Uuid {
 		UuidImpl(Identifier id) {
+			super(id);
+		}
+	}
+
+	private static final class StrImpl extends FlagTypeImpl implements FlagType.Str {
+		StrImpl(Identifier id) {
 			super(id);
 		}
 	}

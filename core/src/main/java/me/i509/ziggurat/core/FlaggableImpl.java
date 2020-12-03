@@ -30,6 +30,7 @@ public abstract class FlaggableImpl implements Flaggable {
 	private final Reference2IntMap<FlagType.Int> intFlags = new Reference2IntOpenHashMap<>();
 	private final Reference2DoubleMap<FlagType.Double> doubleFlags = new Reference2DoubleOpenHashMap<>();
 	private final Map<FlagType.Uuid, UUID> uuidFlags = new IdentityHashMap<>();
+	private final Map<FlagType.Str, String> stringFlags = new IdentityHashMap<>();
 	private final Map<FlagType.Enum<?>, Enum<?>> enumFlags = new IdentityHashMap<>();
 	private final Map<RegistryKey<Registry<?>>, Map<FlagType.RegistryEntry<?>, ?>> registryEntries = new IdentityHashMap<>();
 	private final Map<FlagType.SetValueType, Map<FlagType.Set<?>, Set<?>>> setFlags = Util.make(new EnumMap<>(FlagType.SetValueType.class), map -> {
@@ -83,6 +84,17 @@ public abstract class FlaggableImpl implements Flaggable {
 	}
 
 	@Override
+	public String getString(FlagType.Str flag) {
+		Objects.requireNonNull(flag, "Flag cannot be null");
+
+		if (this.isSet(flag)) {
+			return this.stringFlags.get(flag);
+		}
+
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public <V> V getRegistryEntry(FlagType.RegistryEntry<V> flag) {
 		Objects.requireNonNull(flag, "Flag cannot be null");
 
@@ -126,6 +138,7 @@ public abstract class FlaggableImpl implements Flaggable {
 			return FlagSetResult.SUCCESS;
 		}
 
+		// TODO:
 		return null;
 	}
 
@@ -161,6 +174,12 @@ public abstract class FlaggableImpl implements Flaggable {
 		for (Map.Entry<FlagType.Uuid, UUID> entry : this.uuidFlags.entrySet()) {
 			if (visitor.visit(entry.getKey())) {
 				visitor.visitUuid(entry.getKey(), entry.getValue());
+			}
+		}
+
+		for (Map.Entry<FlagType.Str, String> entry : this.stringFlags.entrySet()) {
+			if (visitor.visit(entry.getKey())) {
+				visitor.visitString(entry.getKey(), entry.getValue());
 			}
 		}
 

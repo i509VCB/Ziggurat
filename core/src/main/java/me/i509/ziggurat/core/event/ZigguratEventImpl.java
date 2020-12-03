@@ -16,7 +16,7 @@ public final class ZigguratEventImpl {
 	}
 
 	private static void internalInit() {
-
+		PlatformEvents.registerPlatformEvents();
 	}
 
 	private ZigguratEventImpl() {
